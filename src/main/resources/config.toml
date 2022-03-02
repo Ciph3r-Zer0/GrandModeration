@@ -1,0 +1,3 @@
+[StaffChat]
+Enabled = true
+Format = "[SC - {player} {server}] » {message}"

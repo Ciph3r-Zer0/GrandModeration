@@ -1,0 +1,9 @@
+[Global]
+Prefix = "&6G&cModeration &7»"
+NoPermission = "{prefix} &cYou don't have permission"
+
+[StaffChat]
+Usage = "{prefix} &cUsage: /StaffChat <message>"
+
+[StaffChatToggle]
+Usage = "{prefix} &cUsage: /StaffChatToggle <Chat, Mute>"
