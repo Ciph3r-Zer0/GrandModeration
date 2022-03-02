@@ -59,7 +59,7 @@ public class StaffChat extends Model {
 
             for (Player p : getProxyServer().getAllPlayers()) {
                 if (!(p.hasPermission(Perms.STAFF_CHAT))) continue;
-                if (!(StaffChatToggle.toggleMute.contains(p.getUniqueId()))) continue;
+                if (StaffChatToggle.toggleMute.contains(p.getUniqueId())) continue;
 
                 Utils.sendMessage(p, msgModel);
             }
