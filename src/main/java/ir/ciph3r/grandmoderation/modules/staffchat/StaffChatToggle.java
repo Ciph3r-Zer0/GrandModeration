@@ -39,8 +39,10 @@ public class StaffChatToggle extends Model {
 
                 if (toggleChat.contains(player.getUniqueId())) {
                     toggleChat.remove(player.getUniqueId());
+                    Utils.sendMessage(player, Messages.STAFF_CHAT_TOGGLE_CHAT_DISABLE);
                 } else {
                     toggleChat.add(player.getUniqueId());
+                    Utils.sendMessage(player, Messages.STAFF_CHAT_TOGGLE_CHAT_ENABLE);
                 }
             } else if (args[0].equalsIgnoreCase("Mute")) {
                 if (!(player.hasPermission(Perms.STAFF_CHAT_TOGGLE_MUTE))) {
@@ -50,30 +52,13 @@ public class StaffChatToggle extends Model {
 
                 if (toggleMute.contains(player.getUniqueId())) {
                     toggleMute.remove(player.getUniqueId());
+                    Utils.sendMessage(player, Messages.STAFF_CHAT_TOGGLE_MUTE_DISABLE);
                 } else {
                     toggleMute.add(player.getUniqueId());
+                    Utils.sendMessage(player, Messages.STAFF_CHAT_TOGGLE_MUTE_ENABLE);
                 }
             } else {
                 Utils.sendMessage(player, Messages.STAFF_CHAT_TOGGLE_USAGE);
-            }
-        }
-    }
-
-    @Subscribe
-    public void onChat(PlayerChatEvent event) {
-        Player player = event.getPlayer();
-        String msgModel = Config.STAFF_CHAT_FORMAT
-                .replace("{message}", event.getMessage())
-                .replace("{player}", player.getUsername())
-                .replace("{server}", player.getCurrentServer().get().getServerInfo().getName());
-
-        if (toggleChat.contains(player.getUniqueId())) {
-
-            for (Player p : getProxyServer().getAllPlayers()) {
-                if (!(p.hasPermission(Perms.STAFF_CHAT))) continue;
-                if (!(toggleMute.contains(p.getUniqueId()))) continue;
-
-                Utils.sendMessage(p, msgModel);
             }
         }
     }

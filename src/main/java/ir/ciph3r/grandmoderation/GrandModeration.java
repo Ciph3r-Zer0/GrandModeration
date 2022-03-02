@@ -7,6 +7,8 @@ import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
 import ir.ciph3r.grandmoderation.modules.staffchat.StaffChat;
+import ir.ciph3r.grandmoderation.modules.staffchat.StaffChatToggle;
+import ir.ciph3r.grandmoderation.storage.permissions.Perms;
 import ir.ciph3r.grandmoderation.storage.toml.Config;
 import ir.ciph3r.grandmoderation.storage.toml.Messages;
 import lombok.Getter;
@@ -44,8 +46,10 @@ public class GrandModeration {
     public void onProxyInitialization(ProxyInitializeEvent event) {
         new Config(getDataDirectory(), getClass()).load();
         new Messages(getDataDirectory(), getClass()).load();
+        new Perms().init();
 
         new StaffChat(getProxyServer()).register();
+        new StaffChatToggle(getProxyServer()).register();
 
     }
     public static GrandModeration getInst() {

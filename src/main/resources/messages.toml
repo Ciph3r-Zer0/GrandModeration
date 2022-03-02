@@ -1,9 +1,15 @@
 [Global]
-Prefix = "&6G&cModeration &7»"
+Prefix = "&6&lG&c&lM &7»"
 NoPermission = "{prefix} &cYou don't have permission"
+NoConsole = "{prefix} &cThis command can'be executed from console"
 
 [StaffChat]
 Usage = "{prefix} &cUsage: /StaffChat <message>"
-
-[StaffChatToggle]
-Usage = "{prefix} &cUsage: /StaffChatToggle <Chat, Mute>"
+    [StaffChat.Toggle]
+    Usage = "{prefix} &cUsage: /StaffChatToggle <Chat, Mute>"
+        [StaffChat.Toggle.Chat]
+        EnableMessage = "{prefix} &aStaffChat toggled"
+        DisableMessage = "{prefix} &cStaffChat toggled"
+        [StaffChat.Toggle.Mute]
+        EnableMessage = "{prefix} &cStaffChat muted"
+        DisableMessage = "{prefix} &aStaffChat unmuted"
