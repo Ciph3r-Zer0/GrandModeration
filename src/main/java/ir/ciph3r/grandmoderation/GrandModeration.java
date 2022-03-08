@@ -6,8 +6,10 @@ import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
+import ir.ciph3r.grandmoderation.modules.manager.Manager;
 import ir.ciph3r.grandmoderation.modules.staffchat.StaffChat;
 import ir.ciph3r.grandmoderation.modules.staffchat.StaffChatToggle;
+import ir.ciph3r.grandmoderation.modules.stafflist.StaffList;
 import ir.ciph3r.grandmoderation.storage.permissions.Perms;
 import ir.ciph3r.grandmoderation.storage.toml.Config;
 import ir.ciph3r.grandmoderation.storage.toml.Messages;
@@ -19,7 +21,7 @@ import java.nio.file.Path;
 @Plugin(
         id = "grandmoderation",
         name = "GrandModeration",
-        version = "1.0.0-Alpha",
+        version = "2.0.0",
         description = "A moderation plugin made for velocity based minecraft servers.",
         authors = {"Ciph3r"}
 )
@@ -48,10 +50,13 @@ public class GrandModeration {
         new Messages(getDataDirectory(), getClass()).load();
         new Perms().init();
 
+        new Manager(getProxyServer()).register();
         new StaffChat(getProxyServer()).register();
         new StaffChatToggle(getProxyServer()).register();
+        new StaffList(getProxyServer()).register();
 
     }
+
     public static GrandModeration getInst() {
         return grandModeration;
     }

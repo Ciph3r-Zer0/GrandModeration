@@ -32,15 +32,17 @@ public abstract class Model implements SimpleCommand {
         if (isEnabled()) {
             proxyServer.getEventManager().register(GrandModeration.getInst(), this);
             CommandManager manager = proxyServer.getCommandManager();
-            if (aliases == null) {
-                CommandMeta meta = manager.metaBuilder(commandName)
-                        .build();
-                manager.register(meta, this);
-            } else {
-                CommandMeta meta = manager.metaBuilder(commandName)
-                        .aliases(aliases)
-                        .build();
-                manager.register(meta, this);
+            if (getCommandName() != null) {
+                if (getAliases() == null) {
+                    CommandMeta meta = manager.metaBuilder(getCommandName())
+                            .build();
+                    manager.register(meta, this);
+                } else {
+                    CommandMeta meta = manager.metaBuilder(getCommandName())
+                            .aliases(getAliases())
+                            .build();
+                    manager.register(meta, this);
+                }
             }
         }
     }

@@ -4,6 +4,7 @@ import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.player.PlayerChatEvent;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
+import ir.ciph3r.grandmoderation.modules.manager.Manager;
 import ir.ciph3r.grandmoderation.modules.model.Model;
 import ir.ciph3r.grandmoderation.storage.permissions.Perms;
 import ir.ciph3r.grandmoderation.storage.toml.Config;
@@ -17,7 +18,10 @@ public class StaffChat extends Model {
 
     @Override
     public void execute(Invocation invocation) {
-        if (!(invocation.source() instanceof Player)) return;
+        if (!(invocation.source() instanceof Player)) {
+            Utils.sendMessage(invocation.source(), Messages.NO_CONSOLE);
+            return;
+        }
         if (!(invocation.source().hasPermission(Perms.STAFF_CHAT))) {
             Utils.sendMessage(invocation.source(), Messages.NOT_PERMISSION);
             return;
@@ -37,7 +41,7 @@ public class StaffChat extends Model {
                     .replace("{player}", player.getUsername())
                     .replace("{server}", player.getCurrentServer().get().getServerInfo().getName());
 
-            for (Player p : getProxyServer().getAllPlayers()) {
+            for (Player p : Utils.getPlayersByUUID(Manager.staffList)) {
                 if (!(p.hasPermission(Perms.STAFF_CHAT))) continue;
                 if (StaffChatToggle.toggleMute.contains(p.getUniqueId())) continue;
 
@@ -57,7 +61,7 @@ public class StaffChat extends Model {
         if (StaffChatToggle.toggleChat.contains(player.getUniqueId())) {
             event.setResult(PlayerChatEvent.ChatResult.denied());
 
-            for (Player p : getProxyServer().getAllPlayers()) {
+            for (Player p : Utils.getPlayersByUUID(Manager.staffList)) {
                 if (!(p.hasPermission(Perms.STAFF_CHAT))) continue;
                 if (StaffChatToggle.toggleMute.contains(p.getUniqueId())) continue;
 

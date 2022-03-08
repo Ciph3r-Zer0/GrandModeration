@@ -24,9 +24,9 @@ public class Messages extends Model {
     @Override
     public void init() {
         Toml global = getConfiguration().getTable("Global");
-        PREFIX = global.getString("Prefix");
-        NOT_PERMISSION = global.getString("NoPermission");
-        NO_CONSOLE = global.getString("NoConsole");
+        PREFIX = global.getString("Prefix").replace("{prefix}", PREFIX);
+        NOT_PERMISSION = global.getString("NoPermission").replace("{prefix}", PREFIX);
+        NO_CONSOLE = global.getString("NoConsole").replace("{prefix}", PREFIX);
 
         Toml staffChat = getConfiguration().getTable("StaffChat");
         Toml staffChatToggle = getConfiguration().getTable("StaffChat.Toggle");
@@ -38,6 +38,5 @@ public class Messages extends Model {
         STAFF_CHAT_TOGGLE_CHAT_DISABLE = staffChatToggleChat.getString("DisableMessage").replace("{prefix}", PREFIX);
         STAFF_CHAT_TOGGLE_MUTE_ENABLE = staffChatToggleMute.getString("EnableMessage").replace("{prefix}", PREFIX);
         STAFF_CHAT_TOGGLE_MUTE_DISABLE = staffChatToggleMute.getString("DisableMessage").replace("{prefix}", PREFIX);
-
     }
 }

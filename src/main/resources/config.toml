@@ -1,3 +1,8 @@
 [StaffChat]
 Enabled = true
 Format = "&4[&c&lSC &4- (&c&l{server}&4) (&c&l{player}&4)] » &c{message}"
+
+[StaffList]
+Enabled = true
+FirstLineFormat = "&7&l(&4&l!&7&l) &6List of online staffs"
+ListFormat = "&4- &6{server} &b{player}"
